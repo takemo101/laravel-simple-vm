@@ -1,0 +1,22 @@
+<?php
+
+namespace DummyNamespace;
+
+use Takemo101\LaravelSimpleVM\ViewModel;
+
+class DummyClass extends ViewModel
+{
+    /**
+     * ignores property or method names
+     *
+     * @var string[]
+     */
+    protected array $__ignores = [
+        //
+    ];
+
+    public function __construct()
+    {
+        //
+    }
+}
