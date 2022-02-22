@@ -3,6 +3,7 @@
 namespace Takemo101\LaravelSimpleVM;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Takemo101\SimpleVM\ViewModelDataAdapterCreator;
 
 /**
  * this package service provider class
@@ -41,7 +42,20 @@ class ServiceProvider extends BaseServiceProvider
 
     public function boot(): void
     {
+        $this->bootSimpleViewModel();
         $this->bootConsoleCommands();
+    }
+
+    /**
+     * boot simple view model
+     *
+     * @return void
+     */
+    protected function bootSimpleViewModel(): void
+    {
+        ViewModelDataAdapterCreator::setDefaultCallableResolver(
+            new LaravelCallableResolver($this->app),
+        );
     }
 
     /**

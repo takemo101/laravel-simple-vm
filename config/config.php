@@ -8,7 +8,7 @@ return [
     /**
      * Namespace used in ViewModel creation command
      */
-    'namespace' => env('SMV_NAMESPACE'),
+    'namespace' => env('SVM_NAMESPACE'),
 
     /**
      * Build path in ViewModel creation command

@@ -2,8 +2,10 @@
 
 namespace Takemo101\LaravelSimpleVM;
 
-use Takemo101\SimpleVM\ViewModel as BaseViewModel;
-use Illuminate\Support\Collection;
+use Takemo101\SimpleVM\{
+    ViewModel as BaseViewModel,
+    ArrayAccessObject,
+};
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Support\{
     Arrayable,
@@ -13,6 +15,8 @@ use Illuminate\Contracts\Support\{
 
 /**
  * simple view model for laravel class
+ *
+ * @implements Arrayable<string|int, mixed>
  */
 class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonable
 {
@@ -30,6 +34,7 @@ class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonabl
         // added
         'toResponse',
         'toJson',
+        'toAccessArray',
     ];
 
     /**
@@ -51,7 +56,7 @@ class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonabl
      */
     public function toJson($options = 0)
     {
-        return json_encode($this->jsonSerialize(), $options);
+        return (string)json_encode($this->jsonSerialize(), $options);
     }
 
     /**
@@ -61,6 +66,29 @@ class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonabl
      */
     public function toArray(): array
     {
-        return (new Collection(parent::toArray()))->all();
+        return collect(parent::toArray())->all();
+    }
+
+    /**
+     * to array access object
+     *
+     * @return ArrayAccessObject
+     */
+    public function toArrayAccessObject(): ArrayAccessObject
+    {
+        return new LaravelArrayAccessObject($this->toArray());
+    }
+
+    /**
+     * to access array
+     * Convert an array to an ArrayAccessObject
+     *
+     * @return mixed[]
+     */
+    public function toAccessArray(): array
+    {
+        return (new LaravelArrayAccessObject(
+            collect(parent::toArray())->toArray(),
+        ))->toArray();
     }
 }
