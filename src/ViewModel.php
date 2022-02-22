@@ -13,6 +13,8 @@ use Illuminate\Contracts\Support\{
 
 /**
  * simple view model for laravel class
+ *
+ * @implements Arrayable<string|int, mixed>
  */
 class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonable
 {
@@ -51,7 +53,7 @@ class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonabl
      */
     public function toJson($options = 0)
     {
-        return json_encode($this->jsonSerialize(), $options);
+        return (string)json_encode($this->jsonSerialize(), $options);
     }
 
     /**

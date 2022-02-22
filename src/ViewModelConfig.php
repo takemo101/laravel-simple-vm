@@ -45,7 +45,7 @@ final class ViewModelConfig
     /**
      * set root namespace
      *
-     * @param string $rootNamespace
+     * @param string $namespace
      * @return self
      */
     public function setNamespace(?string $namespace = null): self
@@ -103,7 +103,6 @@ final class ViewModelConfig
     /**
      * get path
      *
-     * @param string $path
      * @return string|null
      */
     public function getPath(): ?string
