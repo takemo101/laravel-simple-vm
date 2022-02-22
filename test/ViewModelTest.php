@@ -3,7 +3,10 @@
 namespace Test;
 
 use Illuminate\Support\Collection;
-use Takemo101\LaravelSimpleVM\ViewModel;
+use Takemo101\LaravelSimpleVM\{
+    ViewModel,
+    ViewModelConfig,
+};
 use Takemo101\SimpleVM\Attribute\{
     Ignore,
     ChangeName,
@@ -58,13 +61,13 @@ class TestViewModel extends ViewModel
     }
 
     #[ChangeName('cc')]
-    public function c(): Collection
+    public function c(ViewModelConfig $config): Collection
     {
         return new Collection([
             'ccc' => [
                 1,
                 2,
-                3,
+                $config->getPath(),
             ],
         ]);
     }
