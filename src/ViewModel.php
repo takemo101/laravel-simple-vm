@@ -2,8 +2,10 @@
 
 namespace Takemo101\LaravelSimpleVM;
 
-use Takemo101\SimpleVM\ViewModel as BaseViewModel;
-use Illuminate\Support\Collection;
+use Takemo101\SimpleVM\{
+    ViewModel as BaseViewModel,
+    ArrayAccessObject,
+};
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Support\{
     Arrayable,
@@ -32,6 +34,7 @@ class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonabl
         // added
         'toResponse',
         'toJson',
+        'toAccessArray',
     ];
 
     /**
@@ -63,6 +66,18 @@ class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonabl
      */
     public function toArray(): array
     {
-        return (new Collection(parent::toArray()))->all();
+        return collect(parent::toArray())->all();
+    }
+
+    /**
+     * to access array
+     *
+     * @return mixed
+     */
+    public function toAccessArray(): array
+    {
+        return (new LaravelArrayAccessObject(
+            collect(parent::toArray())->toArray(),
+        ))->toArray();
     }
 }
