@@ -70,6 +70,16 @@ class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonabl
     }
 
     /**
+     * to array access object
+     *
+     * @return ArrayAccessObject
+     */
+    public function toArrayAccessObject(): ArrayAccessObject
+    {
+        return new LaravelArrayAccessObject($this->toArray());
+    }
+
+    /**
      * to access array
      *
      * @return mixed

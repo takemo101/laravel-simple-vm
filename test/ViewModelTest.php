@@ -4,6 +4,8 @@ namespace Test;
 
 use Illuminate\Support\Collection;
 use Takemo101\LaravelSimpleVM\{
+    ArrayAccessObjectKeyArgumentException,
+    LaravelArrayAccessObject,
     ViewModel,
     ViewModelConfig,
 };
@@ -44,6 +46,42 @@ class ViewModelTest extends TestCase
         $json = $model->toJson();
 
         $this->assertEquals($json, '{"a":"A","CC":"C"}');
+    }
+
+    /**
+     * @test
+     */
+    public function createArrayAccessObject__OK(): void
+    {
+        $model = TestViewModel::of(
+            [1, 2, 3],
+            'B',
+        );
+
+        $data = $model->toAccessArray();
+
+        $this->assertTrue(count($data['a']) == 3);
+        $this->assertFalse(array_key_exists('b', $data));
+        $this->assertTrue(array_key_exists('cc', $data));
+        $this->assertTrue(is_array($data['cc']->ccc->toArray()));
+        $this->assertTrue($data['cc'] instanceof LaravelArrayAccessObject);
+    }
+
+    /**
+     * @test
+     */
+    public function createArrayAccessObject__NG(): void
+    {
+        $this->expectException(ArrayAccessObjectKeyArgumentException::class);
+
+        $model = TestViewModel::of(
+            [1, 2, 3],
+            'B',
+        );
+
+        $data = $model->toArrayAccessObject();
+
+        $data[1] = 10;
     }
 }
 
