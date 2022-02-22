@@ -82,7 +82,7 @@ class ViewModel extends BaseViewModel implements Arrayable, Responsable, Jsonabl
     /**
      * to access array
      *
-     * @return mixed
+     * @return mixed[]
      */
     public function toAccessArray(): array
     {
