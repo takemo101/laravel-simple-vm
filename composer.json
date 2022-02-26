@@ -17,6 +17,7 @@
     "homepage": "https://github.com/takemo101/laravel-simple-vm",
     "license": "MIT",
     "require": {
+        "php": "^8.0",
         "illuminate/support": "^8|^9",
         "illuminate/filesystem": "^8|^9",
         "illuminate/console": "^8|^9",

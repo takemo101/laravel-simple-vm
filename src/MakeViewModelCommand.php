@@ -15,14 +15,15 @@ class MakeViewModelCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'make:svm {name}';
+    protected $name = 'make:svm';
+
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'make simple view model class';
+    protected $description = 'Create a new view model class';
 
     /**
      * The type of class being generated.
