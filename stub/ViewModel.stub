@@ -15,6 +15,9 @@ class DummyClass extends ViewModel
         //
     ];
 
+    /**
+     * constructor
+     */
     public function __construct()
     {
         //
