@@ -20,7 +20,7 @@ Execute the artisan command as below.
 ### Basic
 #### 1. Create a ViewModel class
 First, create a ViewModel class to output the data to View.
-```
+```php
 <?php
 
 namespace App\Http\ViewModel;
@@ -98,7 +98,7 @@ class TestViewModel extends ViewModel
 ```
 #### 2. Use ViewModel class in Controller class
 Next, use the created ViewModel class object as a response in the controller.
-```
+```php
 <?php
 
 namespace App\Http\Controllers;
@@ -144,7 +144,7 @@ class HomeController
 }
 ```
 Below is the output result in Json.
-```
+```json
 {
 	"description": "description",
 	"users": [],
