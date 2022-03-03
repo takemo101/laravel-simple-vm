@@ -83,6 +83,27 @@ class ViewModelTest extends TestCase
 
         $data[1] = 10;
     }
+
+    /**
+     * @test
+     */
+    public function createArrayAccessObject__magicMethodCall__OK(): void
+    {
+        $model = TestViewModel::of(
+            [1, 2, 3],
+            'B',
+        );
+
+        $data = $model->toArrayAccessObject();
+
+        $this->assertEquals($data->cc()->ccc()[1], 2);
+        $this->assertEquals($data->cc->ccc[1], 2);
+
+        $data->b('C');
+
+        $this->assertEquals($data->b(), 'C');
+        $this->assertEquals($data->b, 'C');
+    }
 }
 
 /**
@@ -99,15 +120,15 @@ class TestViewModel extends ViewModel
     }
 
     #[ChangeName('cc')]
-    public function c(ViewModelConfig $config): Collection
+    public function c(ViewModelConfig $config): array
     {
-        return new Collection([
+        return [
             'ccc' => [
                 1,
                 2,
                 $config->getPath(),
             ],
-        ]);
+        ];
     }
 }
 

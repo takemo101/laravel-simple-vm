@@ -3,7 +3,10 @@
 namespace Takemo101\LaravelSimpleVM;
 
 use Takemo101\SimpleVM\ArrayAccessObject;
-use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\{
+    Arrayable,
+    Jsonable,
+};
 use Illuminate\Support\Arr;
 
 /**
@@ -11,7 +14,7 @@ use Illuminate\Support\Arr;
  *
  * @implements Arrayable<string|int, mixed>
  */
-final class LaravelArrayAccessObject extends ArrayAccessObject implements Arrayable
+final class LaravelArrayAccessObject extends ArrayAccessObject implements Arrayable, Jsonable
 {
     /**
      * implements ArrayAccess
@@ -72,5 +75,35 @@ final class LaravelArrayAccessObject extends ArrayAccessObject implements Arraya
             throw new ArrayAccessObjectKeyArgumentException($key);
         }
         Arr::forget($this->data, $key);
+    }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->jsonSerialize(), $options);
+    }
+
+    /**
+     * get and set the value by the method.
+     *
+     * @param string $method
+     * @param mixed[] $parameters
+     * @return mixed
+     */
+    public function __call(string $method, array $parameters): mixed
+    {
+        if (count($parameters)) {
+
+            $this[$method] = $parameters[0];
+
+            return $this;
+        }
+
+        return $this[$method];
     }
 }
