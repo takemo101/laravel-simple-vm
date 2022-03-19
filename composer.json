@@ -21,7 +21,7 @@
         "illuminate/support": "^8|^9",
         "illuminate/filesystem": "^8|^9",
         "illuminate/console": "^8|^9",
-        "takemo101/simple-vm": "^0.1.1"
+        "takemo101/simple-vm": "^0.1.4"
     },
     "autoload": {
         "psr-4": {
@@ -48,6 +48,7 @@
     "require-dev": {
         "php": "^8.0",
         "phpunit/phpunit": "^9.5",
-        "orchestra/testbench": "^7.0"
+        "orchestra/testbench": "^7.0",
+        "phpstan/phpstan": "^1.4"
     }
 }

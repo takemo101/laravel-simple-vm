@@ -1,4 +1,9 @@
 # The Simple VM For Laravel
+
+[![PHPStan](https://github.com/takemo101/laravel-simple-vm/actions/workflows/phpstan.yml/badge.svg)](https://github.com/takemo101/laravel-simple-vm/actions/workflows/phpstan.yml)
+[![Validate Composer](https://github.com/takemo101/laravel-simple-vm/actions/workflows/composer.yml/badge.svg)](https://github.com/takemo101/laravel-simple-vm/actions/workflows/composer.yml)
+[![Testing](https://github.com/takemo101/laravel-simple-vm/actions/workflows/testing.yml/badge.svg)](https://github.com/takemo101/laravel-simple-vm/actions/workflows/testing.yml)
+
 This package is a wrap of Simple VM for Laravel.  
 You can also create a ViewModel class with a command.  
 Enjoy!
@@ -134,10 +139,10 @@ class HomeController
 
         // By using the toAccessArray method, you can treat the output data like an object on the template.
         
-        return view('home.view', TestViewModel::of(
+        return view('home.view', (new TestViewModel(
             'description',
             $user,
-        )->toAccessArray());
+        ))->toAccessArray());
 
         // You can create an object from the of method of the ViewModel class
     }

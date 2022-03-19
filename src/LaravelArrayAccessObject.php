@@ -85,7 +85,7 @@ final class LaravelArrayAccessObject extends ArrayAccessObject implements Arraya
      */
     public function toJson($options = 0)
     {
-        return json_encode($this->jsonSerialize(), $options);
+        return (string)json_encode($this->jsonSerialize(), $options);
     }
 
     /**
