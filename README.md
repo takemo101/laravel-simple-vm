@@ -1,4 +1,9 @@
 # The Simple VM For Laravel
+
+[![PHPStan](https://github.com/takemo101/laravel-simple-vm/actions/workflows/phpstan.yml/badge.svg)](https://github.com/takemo101/laravel-simple-vm/actions/workflows/phpstan.yml)
+[![Validate Composer](https://github.com/takemo101/laravel-simple-vm/actions/workflows/composer.yml/badge.svg)](https://github.com/takemo101/laravel-simple-vm/actions/workflows/composer.yml)
+[![Testing](https://github.com/takemo101/laravel-simple-vm/actions/workflows/testing.yml/badge.svg)](https://github.com/takemo101/laravel-simple-vm/actions/workflows/testing.yml)
+
 This package is a wrap of Simple VM for Laravel.  
 You can also create a ViewModel class with a command.  
 Enjoy!
