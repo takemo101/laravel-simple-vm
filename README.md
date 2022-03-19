@@ -134,10 +134,10 @@ class HomeController
 
         // By using the toAccessArray method, you can treat the output data like an object on the template.
         
-        return view('home.view', TestViewModel::of(
+        return view('home.view', (new TestViewModel(
             'description',
             $user,
-        )->toAccessArray());
+        ))->toAccessArray());
 
         // You can create an object from the of method of the ViewModel class
     }

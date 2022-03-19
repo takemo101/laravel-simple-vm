@@ -15,15 +15,14 @@ class MakeViewModelCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:svm';
-
+    protected $signature = 'make:svm {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new view model class';
+    protected $description = 'make simple view model class';
 
     /**
      * The type of class being generated.
@@ -55,11 +54,19 @@ class MakeViewModelCommand extends GeneratorCommand
          */
         $vmConfig = $this->getLaravel()->make(ViewModelConfig::class);
 
-        $path = $vmConfig->hasPath() ? $vmConfig->getPath() : $this->laravel['path'];
+        /**
+         * @var \Illuminate\Foundation\Application
+         */
+        $laravel = $this->getLaravel();
+
+        $path = $vmConfig->hasPath() ? $vmConfig->getPath() :
+            $laravel->path();
 
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return $path . '/' . str_replace('\\', '/', $name) . '.php';
+        $replace = (string)str_replace('\\', '/', $name);
+
+        return $path . '/' . $replace . '.php';
     }
 
     /**

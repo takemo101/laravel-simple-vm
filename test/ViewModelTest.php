@@ -21,7 +21,7 @@ class ViewModelTest extends TestCase
      */
     public function createViewModel__OK(): void
     {
-        $model = TestViewModel::of(
+        $model = new TestViewModel(
             [1, 2, 3],
             'B',
         );
@@ -39,7 +39,7 @@ class ViewModelTest extends TestCase
      */
     public function executeToJson__OK(): void
     {
-        $model = JsonViewModel::of(
+        $model = new JsonViewModel(
             'A',
         );
 
@@ -53,7 +53,7 @@ class ViewModelTest extends TestCase
      */
     public function createArrayAccessObject__OK(): void
     {
-        $model = TestViewModel::of(
+        $model = new TestViewModel(
             [1, 2, 3],
             'B',
         );
@@ -74,7 +74,7 @@ class ViewModelTest extends TestCase
     {
         $this->expectException(ArrayAccessObjectKeyArgumentException::class);
 
-        $model = TestViewModel::of(
+        $model = new TestViewModel(
             [1, 2, 3],
             'B',
         );
@@ -89,7 +89,7 @@ class ViewModelTest extends TestCase
      */
     public function createArrayAccessObject__magicMethodCall__OK(): void
     {
-        $model = TestViewModel::of(
+        $model = new TestViewModel(
             [1, 2, 3],
             'B',
         );
