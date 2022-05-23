@@ -5,15 +5,15 @@ start:
 
 .PHONY: shell
 shell:
-	docker-compose exec php81 bash
+	docker-compose exec php bash
 
 .PHONY: stop
 stop:
-	docker-compose stop php81
+	docker-compose stop php
 
 .PHONY: remove
 remove:
-	docker-compose rm php81
+	docker-compose rm php
 
 .PHONY: install
 install:
@@ -29,33 +29,18 @@ autoload:
 
 .PHONY: test
 test:
-	docker-compose run --rm php81 ./vendor/bin/phpunit
-
-.PHONY: test80
-test80:
-	docker-compose run --rm php80 ./vendor/bin/phpunit
+	docker-compose run --rm php ./vendor/bin/phpunit
 
 .PHONY: phpstan
 phpstan:
 	docker-compose run --rm phpstan analyse
 
-#### for document ####
-# draw.io command name
-DRAWIO_COMMAND_NAME = draw.io
-# draw.io application path
-DRAWIO_APPLICATION_PATH = /Applications/draw.io.app/Contents/MacOS/draw.io
-# pdf output path
-DRAWIO_OUTPUT_PATH = ./document/pdf
-# pdf input path
-DRAWIO_INPUT_PATH = ./document
+.PHONY: analyze
+analyze:
+	docker-compose run --rm php ./vendor/bin/phpstan analyse
 
-# please install draw.io application
-# https://github.com/jgraph/drawio-desktop/releases
-setup-di-mac:
-	echo 'alias ${DRAWIO_COMMAND_NAME}=${DRAWIO_APPLICATION_PATH}' >> ~/.bash_profile
-	source ~/.bash_profile
+#### for docker-compose ####
 
-# output pdf
-.PHONY: pdf
-pdf:
-	${DRAWIO_APPLICATION_PATH} -xrf pdf -a -o ${DRAWIO_OUTPUT_PATH} ${DRAWIO_INPUT_PATH}
+.PHONY: setup
+setup:
+	cp .example.env .env
